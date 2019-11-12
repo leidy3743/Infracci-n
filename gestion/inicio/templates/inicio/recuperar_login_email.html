@@ -1,0 +1,15 @@
+{% load i18n %}{% autoescape off %}
+Usted ha recibido este correo porque ha solicitado la recuperacion de su cuenta de usuario en {{ site_name }}.
+
+Por favor dirijase al siguiente link para reiniciar la contraseña de su cuenta
+{% block reset_link %}
+{{ protocol }}://{{ domain }}{% url 'inicio:recuperar_login_confirmacion' uidb64=uid token=token %}
+{% endblock %}
+
+En caso de que haya olvidado su nombre de usuario: {{ user.get_username }}
+
+Gracias por usar nuetro servicio web.
+
+Equipo {{ site_name }}
+
+{% endautoescape %}

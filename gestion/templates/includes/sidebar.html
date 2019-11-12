@@ -1,0 +1,31 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element"> <span>
+                    {% if  user.persona.imagen %}  
+                        <img src={{ user.persona.imagen.url }} alt="image" class="img-circle" width=50 height=50  />
+                     {% else %}
+                        <img src="{{ MEDIA_URL }}imagenes/persona/imagen_no_disponible.png" alt="image" class="img-circle" width=50 height=50/>
+                         {% endif %}</span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name }} {{ user.last_name }}</strong>
+                         </span> <span class="text-muted text-xs block">{{user.persona.tipo}} <b class="caret"></b></span> </span> </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="{% url 'cuenta:editar' %}">Editar Perfil</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'inicio:logout' %}">Salir</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    SERVICIOS DE TRÁNSITO
+                </div>
+            </li>
+            {% if user.persona.tipo == "Administrador" %}
+            {% include "includes/menu_administrador.html" %}
+            {% elif  user.persona.tipo == "Usuario"%}
+            {% include "includes/menu_usuario.html" %}
+            {% endif %}
+        </ul>
+    </div>
+</nav> 

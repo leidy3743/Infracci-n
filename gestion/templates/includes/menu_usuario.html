@@ -1,0 +1,8 @@
+<!-- Opciones del menu para el usuario-->
+            <li>
+                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Gestionar Personal</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{% url 'persona:crear' %}">Nuevo</a></li>
+                        <li><a href="{% url 'persona:listar-personas' %}">Listar/Editar</a></li>
+                    </ul>
+            </li>

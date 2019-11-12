@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block css %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Empleados</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>Información de Empleado</strong>
+            </li>
+        </ol>
+    </div>
+    <h2 class="pull-right"><strong>Gestión de Personal</strong></h2> 
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox center">
+            <div class="ibox-content">
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="row m-b-lg">
+                            <div class="col-lg-12">
+                                <h2>{{ persona.user.first_name }} {{ persona.user.last_name }}</h2>
+                                <div class="m-b-sm">
+                                    {% if persona.imagen %}  
+                                        <img src={{ persona.imagen.url }} alt="image" class="img-circle" width=150 height=150  />
+                                     {% else %}
+                                        <img src="{{ MEDIA_URL }}imagenes/persona/imagen_no_disponible.png" alt="image" class="img-circle" width=150 height=150/>
+                                         {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <strong>
+                                    Descripción
+                                </strong>
+                                <p>
+                                    {{ persona.descripciontu }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="client-detail">
+                            <strong>Información General</strong>
+                            <ul class="list-group clear-list">
+                                <li class="list-group-item">
+                                    <span class="center"> USUARIO: {{ persona.user }}</span>
+                                </li>
+                                <li class="list-group-item" > 
+                                    <span> IDENTIFICACION: {{ persona.identificacion }} </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="" style="text-align: left;"> Teléfono: {{ persona.telefono }} </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="center"> DIRECCION: {{ persona.direccion }} </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="center"> CORREO ELECTRONICO: {{ persona.correo }} </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="center"> EMPRESA: {{ persona.empresa }} </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="center"> CARGO LABORAL: {{ persona.cargo }} </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="center"> TIPO DE USUARIO: {{ persona.tipo }} </span>
+                                </li>
+                                <li class="list-group-item">
+                                    {% if persona.estado %}
+                                    <span class="center"> ESTADO: Activo </span>  
+                                        
+                                     {% else %}
+                                    <span class="center"> ESTADO: Desactivado </span>
+                                         {% endif %}
+                                </li>
+                            </ul>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "login.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="passwordBox animated fadeInDown">
+    <div class="row">
+        <div class="col-md-30">
+            <div class="ibox-content">
+                <h2 class="font-bold">AFORO VEHICULOS</h2>
+                <div class="row">
+                    <div class="col-lg-12">    
+                        <form action="{% url 'inicio:login' %}" method="POST" class="m-t" >{% csrf_token %}
+                            <div class="form-group">
+                                <label>
+                                    <p class="text-info">
+                                        Hemos enviado un correo con instrucciones para hacer el cambio de contraseña, si su cuenta existe con el email que usted ha digitado, entonces recibira el correo en breve. 
+                                    </p>
+                                    <p>
+                                        Si usted no recibe el correo, posiblemente el correo que usted digito no esta relacionado con su cuenta. Asegurese de haber escrito correctamente el correo.
+                                    </p>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            Aforo Vehiculos
+        </div>
+        <div class="col-md-6 text-right">
+           <small>© 2017</small>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

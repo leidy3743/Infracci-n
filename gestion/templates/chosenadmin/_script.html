@@ -1,0 +1,28 @@
+{% comment %}
+
+NOTE: This template embeds the minified version of the Chosen plugin.
+
+Additionally, there is a document-ready block of code (at the bottom) that
+initializes the plugin and hacks a few of Django's default CSS styles.
+
+This all gets included inline at the bottom of the page, right before the
+closing </body> tag.
+
+{% endcomment %}
+<script type="text/javascript">
+jQuery = jQuery ? jQuery : django.jQuery;
+var $ = jQuery ? jQuery : django.jQuery;
+{{ chosen_js }}
+
+{# ------ Selector to replace <select> elements with chosen ------ #}
+$(document).ready(function() {
+  var chosenOptions = {width: "300px"};
+  // If the underlying <select> is updated, re-render chosen.
+  $(".form-row select").change(function(e) {
+    $(this).chosen('destroy').chosen(chosenOptions);
+  });
+  // Initial chosen setup.
+  $(".form-row select").chosen(chosenOptions);
+});
+</script>
+</body> {# NOTE: we replace the existing `</body>` with this template's content #}

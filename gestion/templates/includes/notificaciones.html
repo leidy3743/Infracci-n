@@ -1,0 +1,38 @@
+<li class="dropdown">
+    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+        <i class="fa fa-bell"></i>  <span class="label label-primary">{{ messages| length }}</span>
+    </a>
+    <ul class="dropdown-menu dropdown-alerts">
+        <li class="dropdown-header">Notificaciones ({{ messages| length }})
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <a href="javascript:;">
+                <div>
+                    <i class="fa fa-plus"></i>
+                    <p> {{message}} </p>
+                    <span class="pull-right text-muted small">1 segundo</span>
+                </div>
+            </a>
+        </li>
+        <li class="divider"></li>
+        {% endif %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <li>
+            <a href="javascript:;">
+                <div>
+                    <i class="fa fa-bu"></i>
+                    <p> {{ message }} </p>
+                    <span class="pull-right text-muted small">1 segundo</span>
+                </div>
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <li class="divider"></li>
+    </ul>
+</li>
+<li>
+    <a href="{% url 'inicio:login' %}">
+        <i class="fa fa-home" style="font-size:19px"></i>
+    </a>
+</li>

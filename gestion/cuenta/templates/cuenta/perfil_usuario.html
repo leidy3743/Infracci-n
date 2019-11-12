@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'amcharts/amcharts.js' %}"></script>
+<script src="{% static 'amcharts/themes/light.js' %}"></script>  
+<script src="{% static 'amcharts/serial.js' %}"></script>
+<script src="{% static 'amcharts/plugins/export/export.min.js' %}"></script>
+<script src="{% static 'amcharts/plugins/export/lang/es.js' %}"></script>
+<script src="{% static 'amcharts/plugins/responsive/responsive.min.js' %}"></script>
+<link href="{% static 'amcharts/plugins/export/export.css' %}" rel="stylesheet"/>
+
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">Total</span>
+                    <h5>USUARIOS</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">1</h1>
+                    <small>Cantidad</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">Total</span>
+                    <h5>INFRACCIONES</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">1</h1>
+                    <small>Cantidad</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-danger pull-right">Último</span>
+                    <h5>ÚLTIMO LOGIN</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{ user.last_login |date:"M d, Y" }}</h1>
+                    <small>Último</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+{% endblock %}

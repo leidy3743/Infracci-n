@@ -1,0 +1,44 @@
+{% extends "login.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+
+<div class="passwordBox animated fadeInDown">
+    <div class="row">
+        <div class="col-md-30">
+            <div class="ibox-content">
+                <h2 class="font-bold">AFORO VEHICULOS</h2>
+                <p>Por favor confirma tu correo electronico para recuperar tu cuenta.</p>
+                <div class="row">
+                    <div class="col-lg-12">    
+                        <form class="m-t" role="form" action="" method="POST" >{% csrf_token %}
+                            <div class="form-group">
+                                {% bootstrap_form form %}
+                            </div>
+                            <button type="submit" class="btn btn-primary block full-width m-b">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            Aforo Vehiculos
+        </div>
+        <div class="col-md-6 text-right">
+           <small>© 2017</small>
+        </div>
+    </div>
+</div>
+{% endblock %}

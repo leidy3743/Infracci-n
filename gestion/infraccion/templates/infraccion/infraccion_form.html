@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+            <!-- begin row -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Infracciones</h2>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <strong>{{ section_title }}</strong>
+                </li>
+            </ol>
+        </div>
+        <h2 class="pull-right"><strong>Gestión de Infracciones</strong></h2> 
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>{{ section_title }}</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="fullscreen-link">
+                                    <i class="fa fa-expand"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="ibox-content">
+                        <p>Por favor diligencie el siguiente formulario</p>
+                        <p></p>
+                        <FONT COLOR="red">Campos Obligatorios * </FONT>
+                        <form method="post" enctype="multipart/form-data" class="form-horizontal">{% csrf_token %}
+                            <fieldset>
+                                <div class="col-lg-6">
+                                        {% bootstrap_form form %}
+                                    <div class="pull-right" >
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-cog"></i> Guardar</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                        
+                    </div>
+
+
+                </div>
+            </div>
+        </div>  
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+        $('#id_fecha').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+</script>
+{{ block.super }}
+{% endblock %}

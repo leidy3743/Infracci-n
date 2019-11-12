@@ -1,0 +1,63 @@
+{% extends "login.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block custom-css %}
+{% endblock %}
+
+{% block content %}
+
+<div class="passwordBox animated fadeInDown">
+    <div class="row">
+        <div class="col-md-30">
+            <div class="ibox-content">
+
+                <h2 class="font-bold">AFORO VEHICULOS</h2>
+
+                <div class="row">
+                <div class="col-lg-12">    
+                    <form action="{% url 'inicio:recuperar_login_terminado' %}" method="POST" class="m-t">{% csrf_token %}
+                        <div class="form-group">
+                            <label>
+                                <p class="text-info">
+                                Por favor digite una nueva contraseña valida
+                                </p>
+                            </label>
+                        </div>
+                        {% if validlink %}
+                            {% bootstrap_form form %}
+                        {% else %}
+                        <p>
+                        El link para recuperar la cuenta es invalido, posiblemente
+                        ya ha sido usado. Por favor vuelva a solicitar la recuperación de su cuenta.
+                        </p>
+                        {% endif %}
+                        <div class="login-buttons">
+                            <button type="submit" class="btn btn-primary block full-width m-b">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            Aforo Vehiculos
+        </div>
+        <div class="col-md-6 text-right">
+           <small>© 2017</small>
+        </div>
+    </div>
+</div>
+{% endblock %}

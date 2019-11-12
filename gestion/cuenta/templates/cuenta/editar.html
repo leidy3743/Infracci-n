@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Editar Cuenta</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>Editar Cuenta</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                        <h5>Información de la Cuenta</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                <div class="ibox-content">
+                    <p>Por favor diligencie el siguiente formulario</p>
+                    
+                    <form method="post" data-parsley-validate="true" id="form" enctype="multipart/form-data" class="wizard-big">{% csrf_token %}
+                        <h1>Información Cuenta</h1>
+                        <fieldset>
+                            <h2>Información Cuenta</h2>
+                            <FONT COLOR="red">Campos Obligatorios *</FONT>
+                            <p></p>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {% bootstrap_form user_form %}
+                                    {% bootstrap_form persona_form %}
+
+                                    <!--<div><label> <input type="checkbox" id="id_estado" value="">  </label></div>-->
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-center">
+                                        <div style="margin-top: 20px">
+                                            <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+{{ form.media.js }}
+
+<!-- Principales scripts -->
+<script src="{% static 'inspinia/js/plugins/steps/jquery.steps.min.js' %}"></script>
+<script src="{% static 'inspinia/js/plugins/steps/jquery.steps.fix.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $("#wizard").steps();
+        $("#form").steps({
+            bodyTag: "fieldset",
+            onStepChanging: function (event, currentIndex, newIndex)
+            {
+                resizeJquerySteps();
+                if (currentIndex > newIndex)
+                {
+                    return true;
+                }
+                if (newIndex === 3 && Number($("#age").val()) < 18)
+                {
+                    return false;
+                }
+
+                var form = $(this);
+                if (currentIndex < newIndex)
+                {
+                    $(".body:eq(" + newIndex + ") label.error", form).remove();
+                    $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                }
+                form.validate().settings.ignore = ":disabled,:hidden";
+                return form.valid();
+            },
+            onInit: function(event, currentIndex)
+            {
+                resizeJquerySteps();
+            },
+            
+            onStepChanged: function (event, currentIndex, priorIndex)
+            {
+                resizeJquerySteps();
+                if (currentIndex === 2 && Number($("#age").val()) >= 18)
+                {
+                    $(this).steps("Siguiente");
+                }
+
+                if (currentIndex === 2 && priorIndex === 3)
+                {
+                    $(this).steps("Anterior");
+                }
+            },
+            onFinishing: function (event, currentIndex)
+            {
+                var form = $(this);
+                form.validate().settings.ignore = ":disabled";
+
+                return form.valid();
+            },
+            
+            onFinished: function (event, currentIndex)
+            {
+                var form = $(this);
+
+                form.submit();
+            }
+
+        }).validate({
+                    errorPlacement: function (error, element)
+                    {
+                        element.before(error);
+                    },
+                    rules: {
+                        confirm: {
+                            equalTo: "#password"
+                        }
+                    }
+                });
+   });
+
+</script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load staticfiles %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SERVICIOS DE TRÁNSITO | Principal</title>
+
+    {% block css %}
+        {% include "includes/css.html" %}
+    {% endblock %}
+
+</head>
+<body>
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+        
+        {% block sidebar %}
+            {% include "includes/sidebar.html" %}
+        {% endblock %}
+
+        <div id="page-wrapper" class="gray-bg">
+            {% include "includes/header.html" %}
+            {% include "includes/notificacion_modal.html" %}
+            {% block content %}
+            {% endblock %}
+            <div class="footer">
+                <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+                <div class="pull-right">
+                    <strong>Copyright</strong> SERVICIOS DE TRÁNSITO &copy; 2019
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% block javascript %}
+    {% include "includes/javascript.html" %}
+    {% endblock %}
+</body>
+</html>

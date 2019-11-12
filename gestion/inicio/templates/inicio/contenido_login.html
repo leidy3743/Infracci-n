@@ -1,0 +1,41 @@
+{% extends "login.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="ibox-content">
+<h3>TRÁNSITO</h3>
+<p>Servicios de tránsito.
+</p>
+<p>Inicio Sesión</p>
+    <form action="{% url 'inicio:login' %}" method="POST" class="m-t">{% csrf_token %}
+        <div>
+            <div class="form-group">
+                <input name="username" type="text" class="form-control" placeholder="Nombre de usuario" required="">
+            </div>
+            <div class="form-group">
+                <input name="password" type="password" class="form-control" placeholder="Contraseña" required="">
+            </div>
+            <div class="m-t-20">
+                <label>
+                    {% if message %}
+                        <p class="text-warning">{{ message }}</p>
+                    {% endif %}
+                </label>
+            </div>
+            <div class="login-buttons">
+                <button type="submit" class="btn btn-primary block full-width m-b">Iniciar
+                </button>
+            </div>
+            <div class="m-t-20">Olvidaste tu contraseña? Click <a href="{% url 'inicio:recuperar_login' %}">aqui</a> para recuperar.
+            </div>
+        </div>
+    </form>
+        
+
+<div>
+    <p class="m-t"> <small>SERVICIOS DE TRÁNSITO  &copy; 2019</small> </p>
+</div>
+
+{% endblock %}
